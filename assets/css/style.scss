@@ -25,6 +25,7 @@ $mainColor: #60606e;
 $secondaryColor: #999999;
 $margCenter: 0 auto;
 $marg0: 0;
+$textAlignDefault: left;
 $maxW: 1300px;
 
 
@@ -34,7 +35,7 @@ $maxW: 1300px;
     align-items: $algnItems;
 }
 
-@mixin before ($width) {
+@mixin before ($width, $top, $left) {
     &::before {
         content: '';
         display: block;
@@ -43,7 +44,9 @@ $maxW: 1300px;
         padding: 10px;
         margin: 0;
         position: absolute;
-        top: 25px;
+        top: $top;
+        left: $left;
+        z-index: -1;
     }
 }
 
@@ -168,10 +171,11 @@ body {
 
         .header__subheading {
             position: relative;
+            z-index: 1;
             margin: 0;
             padding: 0 0 28px 0;
             text-align: left;
-            @include before(53px);
+            @include before(53px, 25px, 0);
         }
 
         .header__text {
@@ -209,8 +213,11 @@ body {
     margin: 0 auto;
 
     .section__heading {
-        margin: $margCenter;
-        padding: 249px 0 29px 0;
+        margin: 249px auto 29px auto;
+        padding: 0;
+        position: relative;
+        z-index: 1;
+        @include before(58px, 25px, 39%);
     }
 
     &>p {
@@ -310,6 +317,8 @@ body {
         margin-top: 150px;
         margin-bottom: 30px;
         padding: 0;
+        position: relative;
+        @include before(50px, 25px, 39.5%);
     }
 
     .section-portfolio__text {
@@ -519,9 +528,9 @@ body {
                 margin: 50px 10px;
 
                 &:not(:first-child)::before {
-                    content:"-";
+                    content: "-";
                     margin-right: 15px;
-                    
+
                 }
 
                 a {
@@ -542,5 +551,343 @@ body {
                 }
             }
         }
+    }
+}
+
+
+
+/* About */
+
+.header-about {
+    width: 100%;
+    background-image: url(../images/bg_about.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    .header-box {
+        max-width: $maxW;
+        margin: $margCenter;
+        position: relative;
+    }
+
+    .header__heading-about {
+        font-size: $fontSizeXXL;
+        padding-top: 267px;
+        margin: 0;
+    }
+
+    .header__text-about {
+        padding-top: 25px;
+        padding-bottom: 165px;
+        margin: 0;
+        font-family: $fontPrimary;
+        font-weight: $fontBold;
+        text-transform: uppercase;
+    }
+
+    .author {
+        padding: 0;
+        margin: 0;
+        color: $mainColor;
+        font-family: $fontPrimary;
+        font-size: $fontSizeM + 2px;
+        font-weight: $fontBold;
+        text-transform: uppercase;
+        position: absolute;
+        top: 43px;
+        left: 80px;
+    }
+
+}
+
+/* Section About&Services */
+
+.about-us {
+    width: 100%;
+
+    &-wrapper {
+        max-width: $maxW;
+        margin: $margCenter;
+        width: 100%;
+        @include flex(space-around, stretch);
+        padding-top: 150px;
+    }
+
+    &__info-heading,
+    &__services-heading {
+        padding-bottom: 29px;
+        margin: 0;
+        text-align: left;
+    }
+
+    &__info-text,
+    &__services-text {
+        margin: 0;
+        padding-bottom: 30px;
+        text-align: left;
+        text-transform: uppercase;
+        color: $mainColor;
+        font-weight: 800;
+    }
+
+    &__info-description,
+    &__services-description {
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        width: 552px;
+        line-height: $lineHeightL;
+    }
+}
+
+/* Section Benefits */
+
+.benefits {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    &-wrapper {
+        width: 100%;
+        max-width: $maxW;
+        margin: $margCenter;
+        padding: 0;
+    }
+
+    &__heading {
+        padding: 0;
+        margin-top: 163px;
+        margin-bottom: 30px;
+        position: relative;
+        @include before(55px, 25px, 40%);
+    }
+
+    &__text {
+        width: 716px;
+        margin: $margCenter;
+    }
+
+    .offers-block {
+        padding: 0;
+        margin-top: 163px;
+        @include flex(space-around, stretch);
+        flex-flow: wrap;
+
+        .offers-block-box {
+            flex: 0 1 33.333%;
+
+            &__heading {
+                margin: 0;
+                padding: 0;
+                text-align: $textAlignDefault;
+                font-size: $fontSizeM + 2px;
+            }
+
+            &__text {
+                width: 357px;
+                padding: 0;
+                margin-top: 33px;
+                margin-bottom: 65px;
+                text-align: $textAlignDefault;
+                line-height: $lineHeightL;
+            }
+        }
+
+        .offers-block-box:first-of-type h3::before {
+            content: '';
+            background-image: url(../icons/mobile.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: $bgColor;
+        }
+
+        .offers-block-box:nth-of-type(2) h3::before {
+            content: '';
+            background-image: url(../icons/infinitywhite.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: $bgColor;
+        }
+
+        .offers-block-box:nth-of-type(3) h3::before {
+            content: '';
+            background-image: url(../icons/wp.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: $bgColor;
+        }
+
+        .offers-block-box:nth-of-type(4) h3::before {
+            content: '';
+            background-image: url(../icons/trolleywhite.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: $bgColor;
+        }
+
+        .offers-block-box:nth-of-type(5) h3::before {
+            content: '';
+            background-image: url(../icons/smth.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: $bgColor;
+        }
+
+        .offers-block-box:last-of-type h3::before {
+            content: '';
+            background-image: url(../icons/supwhite.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: $bgColor;
+        }
+    }
+}
+
+/* Section Team */
+.team {
+    width: 100%;
+
+    .team-wrapper {
+        width: 100%;
+        max-width: $maxW;
+        margin: $margCenter;
+    }
+
+    &__heading {
+        padding: 0;
+        margin-top: 150px;
+        margin-bottom: 20px;
+        position: relative;
+        @include before(40px, 25px, 39%)
+    }
+
+    &__text {
+        padding: 0;
+        margin: 0 auto 100px auto;
+        width: 700px;
+    }
+
+    &-presentation-box {
+        @include flex(space-around, stretch);
+        flex-flow: wrap;
+
+        &__img {
+            display: block;
+            margin-bottom: 30px;
+        }
+    }
+
+    &-info {
+        width: 95%;
+        padding: 0;
+        margin: 30px auto 0 auto;
+        background-color: lighten($color: $mainColor, $amount: 50);
+
+        &__text {
+            font-size: $fontSizeM + 2px;
+            line-height: $lineHeightXL;
+            display: inline-block;
+            padding: 60px 190px 60px 30px;
+            font-style: italic;
+        }
+
+        &__btn {
+            width: 165px;
+            
+        }
+    }
+}
+
+/* Section */
+
+.recommendations {
+    width: 100%;
+    margin-bottom: 150px;
+
+    &-wrapper {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        margin: $margCenter;
+        max-width: $maxW;
+        @include flex(space-between, stretch);
+
+    }
+}
+
+.recommendations-box {
+    margin-top: 150px;
+    padding: 0;
+    width: 50%;
+
+    .recommendations__img {
+        display: block;
+        margin: $margCenter;
+    }
+
+    .recommendations__text {
+        width: 550px;
+        padding: 0;
+        margin: 30px auto;
+    }
+
+    .recommendations__btn {
+        display: block;
+        width: 100px;
+        padding: 0;
+        margin: $margCenter;
+    }
+
+    .box-controls {
+        width: 14%;
+        margin: 40px auto 0 auto;
+        @include flex(space-between, stretch);
+
+        .controls {
+            width: 13px;
+            padding: 1px;
+            display: inline-block;
+            background-color: $mainColor;
+
+            &:first-child {
+                background-color: $bgColor;
+            }
+        }
+    }
+}
+
+.recommedations-partners {
+    width: 50%;
+    margin-top: 150px;
+    padding: 0;
+    display: block;
+    @include flex(space-around, baseline);
+    flex-flow: wrap;
+
+    &__box {
+        width: 165px;
+        height: 100px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    
+    &__logo {
+        display: block;
+        margin: 10px auto;
+    }
+
+    &__box:nth-child(4) &__logo {
+        margin-top: 25px;
     }
 }
